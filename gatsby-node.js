@@ -2,7 +2,7 @@ const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
 
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
@@ -56,6 +56,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   }
+
+  createRedirect({
+    fromPath: "/page-2/*",
+    toPath: "https://www.google.com/",
+    statusCode: 200
+  })
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
